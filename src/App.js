@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+import Footer from './components/Footer';
+
+export default class extends Component {
+  constructor() {
+    super();
+    this.state = {
+      toggled: false
+    }
+    this.toggled = this.toggled.bind(this);
+  }
+  toggled() {
+    this.setState({ toggled: !this.state.toggled });
+  }
   render() {
+    let sidebarClassName = this.state.toggled ? "sidebar toggled" : "sidebar";
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="page-wrapper">
+        <nav id="sidebar" className={sidebarClassName}>
+          <Sidebar />
+        </nav>
+        <div className="main-panel">
+          <Topbar toggled={this.toggled} />
+          <div className="main-content"></div>
+          <Footer />
+        </div>
       </div>
     );
   }
 }
-
-export default App;

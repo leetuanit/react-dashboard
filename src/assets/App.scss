@@ -1,0 +1,98 @@
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+$sidebar_width: 300px;
+$sidebar_icon_width: 60px;
+$topbar_height: 60px;
+$footer_height: 30px;
+$sidebar_background_color: #374051;
+$content_background_color: #F6F9FC;
+$topbar_background_color: #ffffff;
+$footer_background_color: #ffffff;
+$border_color: #E5E9F2;
+body, html, #root {
+  height: 100%;
+}
+body {
+  overflow-y: scroll;
+}
+.page-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+.sidebar {
+  width: $sidebar_width;
+  background-color: $sidebar_background_color;
+  height: inherit;
+  margin-left: - $sidebar_width;
+  transition: margin-left 0.4s ease-in-out, left 0.4s ease-in-out;
+  &.toggled {
+    margin-left: 0;
+  }
+  .wrapper {
+    width: inherit;
+    .header {
+      height: $topbar_height;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid $border_color;
+    }
+    .content {
+      .nav {
+        width: 100%;
+        .nav-item {
+          .nav-link {
+            padding: 10px 0 10px 0;
+            display: flex;
+            align-items: center;
+          }
+        }
+        .nav-item:hover {
+          background-color: #2E3645;
+          color: rgb(173, 181, 189);
+        }
+      }
+    }
+    .text {
+      width: calc(100% - #{$sidebar_icon_width});
+    }
+    .icon {
+      width: $sidebar_icon_width;
+    }
+  }
+}
+.main-panel {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: inherit;
+  transition: margin-left 0.4s ease-in-out, left 0.4s ease-in-out;
+}
+.topbar {
+  background-color: $topbar_background_color;
+  width: inherit;
+  height: $topbar_height;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  border-bottom: 1px solid $border_color;
+  .toggleMenu {
+    width: $topbar_height;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+.main-content {
+  width: inherit;
+  background-color: $content_background_color;
+  min-height: calc(100vh - #{$topbar_height} - #{$footer_height})
+}
+.footer {
+  background-color: $footer_background_color;
+  width: inherit;
+  height: $footer_height;
+  text-align: right;
+  border-top: 1px solid $border_color;
+}
