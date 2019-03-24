@@ -3,14 +3,12 @@ img {
   max-height: 100%;
 }
 $sidebar_width: 260px;
-$sidebar_icon_width: 60px;
 $topbar_height: 60px;
 $footer_height: 30px;
-$sidebar_background_color: #374051;
-$content_background_color: #F6F9FC;
+$content_background_color: #F7F7F8;
 $topbar_background_color: #ffffff;
 $footer_background_color: #ffffff;
-$border_color: #E5E9F2;
+$border_color: rgba(0,0,0,.1);
 body, html, #root {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -140,9 +138,10 @@ body {
   max-width: 100%;
   height: inherit;
   transition: margin-left 0.4s ease-in-out, left 0.4s ease-in-out;
-  .navbar {
+  .topbar {
+    background-color: $topbar_background_color;
     height: $topbar_height;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid $border_color;
     .toggleSidebar {
       cursor: pointer;
       i {
@@ -151,5 +150,14 @@ body {
         width: 30px;
       }
     }
+  }
+  .content {
+    min-height: calc(100vh - #{$topbar_height + $footer_height});
+    background-color: $content_background_color;
+  }
+  .footer {
+    border-top: 1px solid $border_color;
+    height: $footer_height;
+    background-color: $footer_background_color;
   }
 }

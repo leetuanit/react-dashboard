@@ -6,7 +6,7 @@ export default class extends Component {
       <div className="content">
         <div className="container-fluid">
           <div className="row">
-            index
+            icon
           </div>
         </div>
       </div>

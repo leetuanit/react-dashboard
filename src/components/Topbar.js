@@ -28,7 +28,7 @@ export default class extends Component {
   }
   render() {
     return (
-      <Navbar color="light" light expand="md">
+      <Navbar light expand="md" className="topbar">
         <div className="toggleSidebar" onClick={this.props.sidebarToggledClick}>
           <i className="pe-7s-way" />
         </div>

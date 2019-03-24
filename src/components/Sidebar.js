@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import Logo from '../logo.svg';
-import { links } from '../variable';
+import dashboardRouter from '../routes/dashboard';
 export default class extends Component {
   render() {
     let classname = "sidebar";
@@ -9,19 +10,19 @@ export default class extends Component {
     }
     return (
       <nav id="sidebar" className={classname}>
-        <a className="logo" href="http://localhost:3000">
+        <a className="logo" href="http://localhost:3000/board">
           <img src={Logo} alt="Logo" />
           <p>Dashboard</p>
         </a>
         <div className="sidebar-wrapper">
           <ul className="nav">
-            {links.map((link, index) => {
+            {dashboardRouter.map((route, index) => {
               return (
                 <li key={index}>
-                  <a href={link.href} className={link.active ? "active" : ""} aria-current={link.active ? "true" : "false"}>
-                    <i className={link.icon} />
-                    <p>{link.title}</p>
-                  </a>
+                  <NavLink exact activeClassName="active" to={route.path}>
+                    <i className={route.icon} />
+                    <p>{route.title}</p>
+                  </NavLink>
                 </li>
               );
             })}
