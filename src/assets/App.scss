@@ -2,7 +2,7 @@ img {
   max-width: 100%;
   max-height: 100%;
 }
-$sidebar_width: 300px;
+$sidebar_width: 260px;
 $sidebar_icon_width: 60px;
 $topbar_height: 60px;
 $footer_height: 30px;
@@ -12,54 +12,126 @@ $topbar_background_color: #ffffff;
 $footer_background_color: #ffffff;
 $border_color: #E5E9F2;
 body, html, #root {
-  height: 100%;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  font-family: Roboto,Helvetica Neue,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
 }
 body {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 .page-wrapper {
-  position: relative;
-  top: 0;
+  display: flex;
   height: 100vh;
 }
 .sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 260px;
-  display: block;
-  z-index: 1;
+  position: relative;
+  width: $sidebar_width;
   color: #fff;
   font-weight: 200;
+  margin-left: - $sidebar_width;
+  background-image: url("/background.jpg");
   background-size: cover;
   background-position: 50%;
   transition: margin-left 0.4s ease-in-out, left 0.4s ease-in-out;
-  &::before {
-    display: block;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
+  &.toggled {
+    margin-left: 0;
   }
-  .sidebar-background {
-    background-image: url("/background.jpg");
+  a:hover {
+    text-decoration: none;
+  }
+  @mixin beforeafter {
     position: absolute;
-    z-index: 1;
-    height: 100%;
     width: 100%;
-    display: block;
+    height: 100%;
     top: 0;
     left: 0;
-    background-size: cover;
-    background-position: 50%;
+  }
+  &::before {
+    @include beforeafter();
+    content: "";
+    z-index: 2;
+    opacity: .33;
+    background: #000;
+  }
+  &::after {
+    @include beforeafter();
+    content: "";
+    z-index: 3;
+    opacity: .77;
+    background: linear-gradient(180deg,#282828 0,#111);
+    background-size: 150% 150%;
   }
   .logo {
+    position: relative;
+    display: flex;
+    z-index: 4;
+    height: $topbar_height;
     padding: 10px 30px;
     border-bottom: 1px solid hsla(0,0%,100%,.2);
+    p {
+      text-transform: uppercase;
+      padding: 5px 0;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 400;
+      line-height: 30px;
+    }
+  }
+  .sidebar-wrapper {
+    position: relative;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    width: $sidebar_width;
+    z-index: 4;
+    padding-bottom: 30px;
+  }
+  .nav {
+    margin-top: 20px;
+    li {
+      width: 100%;
+      a {
+        color: #fff;
+        margin: 5px 15px;
+        padding: 10px 15px;
+        opacity: .86;
+        border-radius: 4px;
+        display: block;
+        &.active {
+          opacity: 1;
+          background: hsla(0,0%,100%,.23);
+        }
+        &:hover {
+          background-color: #5A5A5A;
+        }
+        p {
+          margin: 0;
+          line-height: 30px;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+      &:last-child {
+        position: absolute;
+        bottom: 10px;
+        a {
+          background: hsla(0,0%,100%,.14);
+          opacity: 1;
+        }
+      }
+    }
+    i {
+      font-size: 28px;
+      float: left;
+      margin-right: 15px;
+      line-height: 30px;
+      width: 30px;
+      text-align: center;
+    }
   }
 }
 .main-panel {
@@ -68,4 +140,16 @@ body {
   max-width: 100%;
   height: inherit;
   transition: margin-left 0.4s ease-in-out, left 0.4s ease-in-out;
+  .navbar {
+    height: $topbar_height;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    .toggleSidebar {
+      cursor: pointer;
+      i {
+        font-size: 40px;
+        line-height: 30px;
+        width: 30px;
+      }
+    }
+  }
 }

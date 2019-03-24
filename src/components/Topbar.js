@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
+  Collapse,
   Navbar,
+  NavbarToggler,
   Nav,
   NavItem,
   NavLink,
@@ -9,41 +11,56 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import BurgerIcon from '../assets/icon_svg/Burger.svg';
+
 export default class extends Component {
+  constructor(props) {
+    super(props);
+
+    this.menuToggled = this.menuToggled.bind(this);
+    this.state = {
+      menuToggled: false,
+    };
+  }
+  menuToggled() {
+    this.setState({
+      menuToggled: !this.state.menuToggled
+    });
+  }
   render() {
     return (
-      <div className="topbar">
-        <div className="toggleMenu">
-          <img src={BurgerIcon} alt="" onClick={this.props.toggled} />
+      <Navbar color="light" light expand="md">
+        <div className="toggleSidebar" onClick={this.props.sidebarToggledClick}>
+          <i className="pe-7s-way" />
         </div>
-        <div className="menu">
-          <Navbar light expand="xs">
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
+        <NavbarToggler onClick={this.menuToggled} />
+        <Collapse isOpen={this.state.menuToggled} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/components/">Components</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Options
                 </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
+              <DropdownMenu right>
+                <DropdownItem>
+                  Option 1
                   </DropdownItem>
-                  <DropdownItem>
-                    Option 2
+                <DropdownItem>
+                  Option 2
                   </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Log out
+                <DropdownItem divider />
+                <DropdownItem>
+                  Reset
                   </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Navbar>
-        </div>
-      </div>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }

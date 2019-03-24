@@ -1,57 +1,31 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
-
 import Logo from '../logo.svg';
+import { links } from '../variable';
 export default class extends Component {
   render() {
-    const links = [
-      {
-        href: "/dashboard",
-        title: "Dashboard",
-        icon: "pe-7s-graph"
-      },
-      {
-        href: "/profile",
-        title: "User profile",
-        icon: "pe-7s-user"
-      },
-      {
-        href: "/icon",
-        title: "Icon",
-        icon: "pe-7s-science"
-      },
-      {
-        href: "/notification",
-        title: "Notification",
-        icon: "pe-7s-bell"
-      }
-    ];
+    let classname = "sidebar";
+    if (this.props.isOpen === true) {
+      classname = classname + ' toggled';
+    }
     return (
-      <nav id="sidebar" className="sidebar">
-        <div className="wrapper">
-          <div className="sidebar-background" />
-          <div className="logo">
-            <a href="http://localhost:3000" className="simple-text logo-mini">
-              <div className="logo-img">
-                <img src={Logo} alt="Something" />
-              </div>
-            </a>
-            <a href="http://localhost:3000" className="simple-text logo-normal">Creative Tim</a>
-          </div>
-          <div className="content">
-            <Nav vertical>
-              {links.map((link, index) => {
-                return (
-                  <NavItem key={index}>
-                    <NavLink href={link.href}>
-                      <i className={link.icon} />
-                      {link.title}
-                    </NavLink>
-                  </NavItem>
-                );
-              })}
-            </Nav>
-          </div>
+      <nav id="sidebar" className={classname}>
+        <a className="logo" href="http://localhost:3000">
+          <img src={Logo} alt="Logo" />
+          <p>Dashboard</p>
+        </a>
+        <div className="sidebar-wrapper">
+          <ul className="nav">
+            {links.map((link, index) => {
+              return (
+                <li key={index}>
+                  <a href={link.href} className={link.active ? "active" : ""} aria-current={link.active ? "true" : "false"}>
+                    <i className={link.icon} />
+                    <p>{link.title}</p>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </nav>
     );
